@@ -36,12 +36,10 @@ Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
 Stopped  AJRouter           Service de routeur AllJoyn
 Stopped  ALG                Service de la passerelle de la couc...
 Running  AppIDSvc           Identité de l’application
-- avec une autre commande, lister tous les services qui existent mais ne sont pas lancés
-
+```
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-Service | Where-Object {$_.Status -eq "Stopped"}
-```
 Status   Name               DisplayName
 ------   ----               -----------
 Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
