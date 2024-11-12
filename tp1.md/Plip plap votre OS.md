@@ -16,19 +16,19 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> tasklist
-```
+
 Nom de l’image                 PID Nom de la sessio Numéro de s Utilisation
 ========================= ======== ================ =========== ============
 System Idle Process              0 Services                   0         8 Ko
 System                           4 Services                   0       144 Ko
 Secure System                  172 Services                   0    49 268 Ko
+```
 ## 🌞 Lister tous les services de la machine...
 
 
 
 ```bash
 PS PS C:\Users\jerem\OneDrive\Desktop> Get-Service
-```
 Status   Name               DisplayName
 ------   ----               -----------
 Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
@@ -47,27 +47,26 @@ Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
 Stopped  AJRouter           Service de routeur AllJoyn
 Stopped  ALG                Service de la passerelle de la couc...
 Stopped  AppReadiness       Préparation des applications
+```
 ## 🌞 RAM
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-WmiObject -Class Win32_ComputerSystem
-```
 Domain              : WORKGROUP
 Manufacturer        : HP
 Model               : Victus by HP Gaming Laptop 15-fa1xxx
 Name                : HPVICTUSBJI
 PrimaryOwnerName    : jeremieisraelbeugre@gmail.com
 TotalPhysicalMemory : 16802762752
-- afficher la quantité de RAM libre sur la machine
 
 
 FreePhysicalMemory/1GB)
 0,00567840412259102
+```
 ## 🌞 CPU
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> get-counter
-```
 Timestamp                  CounterSamples
 ---------                  --------------
 04/11/2024 17:23:24        \\hpvictusbji\interface réseau(realtek gaming
@@ -103,6 +102,7 @@ Timestamp                  CounterSamples
                            \\hpvictusbji\disque physique(_total)\taille de
                            file d’attente du disque actuelle :
                            0
+```
 ## 🌞 Périphériques
 
 ```bash
