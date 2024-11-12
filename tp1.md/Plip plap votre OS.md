@@ -4,12 +4,13 @@ le nom de chaque processus :
    
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-Process
-```
+
 Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
 -------  ------    -----      -----     ------     --  -- -----------
     140       9     2588       8344              8532   0 AggregatorHost
     597      21     7536      23412               296   0 AppHelperCap
     374      22    13852      29644       0,19  23444  86 ApplicationFrameHo
+```
 ## 🌞 Trouver les 3 processus qui ont le plus petit identifiant
 
 
