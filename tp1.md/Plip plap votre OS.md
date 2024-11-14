@@ -1,76 +1,71 @@
 ## pour Lister tous les processus en cours d'exécution sur ma machine
- - on doit voir apparaître
+ 
 le nom de chaque processus :
-   - son identifiant unique (un nombre entier)
+   
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-Process
-```
+
 Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
 -------  ------    -----      -----     ------     --  -- -----------
     140       9     2588       8344              8532   0 AggregatorHost
     597      21     7536      23412               296   0 AppHelperCap
     374      22    13852      29644       0,19  23444  86 ApplicationFrameHo
+```
 ## 🌞 Trouver les 3 processus qui ont le plus petit identifiant
 
 
-- leur nom et leur identifiant
-- ce sont forcément des processus très importants : les premiers lancés par votre OS !
-- pour le compte-rendu, isolez les 3 lignes qui les concernent dans la liste de tous les processus
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> tasklist
-```
+
 Nom de l’image                 PID Nom de la sessio Numéro de s Utilisation
 ========================= ======== ================ =========== ============
 System Idle Process              0 Services                   0         8 Ko
 System                           4 Services                   0       144 Ko
 Secure System                  172 Services                   0    49 268 Ko
+```
 ## 🌞 Lister tous les services de la machine...
 
 
-- avec une commande, lister tous les services qui sont en cours d'exécution
+
 ```bash
 PS PS C:\Users\jerem\OneDrive\Desktop> Get-Service
-```
 Status   Name               DisplayName
 ------   ----               -----------
 Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
 Stopped  AJRouter           Service de routeur AllJoyn
 Stopped  ALG                Service de la passerelle de la couc...
 Running  AppIDSvc           Identité de l’application
-- avec une autre commande, lister tous les services qui existent mais ne sont pas lancés
-
+```
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-Service | Where-Object {$_.Status -eq "Stopped"}
-```
 Status   Name               DisplayName
 ------   ----               -----------
 Stopped  AarSvc_6879ea38    Agent Activation Runtime_6879ea38
 Stopped  AJRouter           Service de routeur AllJoyn
 Stopped  ALG                Service de la passerelle de la couc...
 Stopped  AppReadiness       Préparation des applications
+```
 ## 🌞 RAM
-- afficher la quantité de RAM totale de la machine
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-WmiObject -Class Win32_ComputerSystem
-```
 Domain              : WORKGROUP
 Manufacturer        : HP
 Model               : Victus by HP Gaming Laptop 15-fa1xxx
 Name                : HPVICTUSBJI
 PrimaryOwnerName    : jeremieisraelbeugre@gmail.com
 TotalPhysicalMemory : 16802762752
-- afficher la quantité de RAM libre sur la machine
 
 
 FreePhysicalMemory/1GB)
 0,00567840412259102
+```
 ## 🌞 CPU
-- afficher l'utilisation du CPU
-- ça peut être la charge CPU (CPU load) ou une utilisation en %
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> get-counter
-```
 Timestamp                  CounterSamples
 ---------                  --------------
 04/11/2024 17:23:24        \\hpvictusbji\interface réseau(realtek gaming
@@ -106,8 +101,9 @@ Timestamp                  CounterSamples
                            \\hpvictusbji\disque physique(_total)\taille de
                            file d’attente du disque actuelle :
                            0
+```
 ## 🌞 Périphériques
-- lister les périphériques de stockage
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-PnpDevice
 
@@ -142,8 +138,7 @@ OK         System          Pilote d’affichage de base Microsoft
 OK         System          Intel(R) Host Bridge/DRAM Registers - 4649
 OK         HIDClass        Pilote d’indicateur de portable ou de tablett...
 ```
-- je veux voir les disques durs branchés à votre PC, pas les partitions
-- genre je veux pas voir C: dans le retour de la commande
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-PnpDevice -Class 'USB'
 
@@ -158,8 +153,7 @@ OK         USB             Hub USB racine (USB 3.0)                             
 OK         USB             Contrôleur hôte Intel(R) USB 3.10 eXtensible - 1.20 (Microsoft)                  PCI\VEN_...
 ```
 ### Partitions
-- lister les partitions du système
-- sur Windows, les partitions sont notamment C:, D: etc, mais y'en a d'autres qui ne sont pas utilisées actuellement et qui n'utilisent donc pas de lettres comme D:
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-Partition
 
@@ -177,8 +171,7 @@ PartitionNumber  DriveLetter Offset                                        Size 
 
 ```
 ### Espace disque
-- afficher l'espace disque restant sur votre partition principale
-- sur Windows, c'est C: la partition principale
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-CimInstance -Class Win32_LogicalDisk |
 >>   Select-Object -Property DeviceID, Name, @{
@@ -194,8 +187,7 @@ C:       C:   78,64
 
 ```
 ### 🌞 Cartes réseau
-- afficher la liste des cartes réseau de votre PC
-- on doit voit apparaître leur adresse IP et leur nom
+
 
 
 ```bash
@@ -215,14 +207,9 @@ MacAddress : D0-AD-08-24-4E-82
 Name       : Wi-Fi
 MacAddress : 20-0B-74-45-AA-9B
 
-
 ```
 ### 🌞 Connexions réseau
-- lister les connexions réseau actuellement en cours
-- "actuellement en cours" c'est qu'elles sont dans l'état "établi" ou "established" en anglais
-- on doit voir apparaître :
-  - l'adresse IP du serveur auquel vous êtes connectés
-  - le nom et/ou l'identifiant du processus responsable de cette connexion
+
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-NetTCPConnection
 
@@ -338,10 +325,6 @@ LocalAddress                        LocalPort RemoteAddress                     
 
 ```
 ### 🌞 Lister les utilisateurs de la machine
-- on devrait voir au moins :
-  - votre utilisateur
-  - l'utilisateur qui est administrateur sur la machine
-
 
 ```bash
 PS C:\Users\jerem\OneDrive\Desktop> Get-service|Get-Member
