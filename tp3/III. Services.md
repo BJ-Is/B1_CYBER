@@ -63,11 +63,11 @@ bj-is@tpos:~$ ls -l /etc/ssh/sshd_config
 ```
 ### 🌞 Modifier le fichier de conf
 ```bash
-bj-is@tpos:~$ echo $RANDOM
-21898
+bj-is@tpos:~$ echo $((RANDOM % 65535 + 1))
+16038
 
 bj-is@tpos:~$ cat /etc/ssh/sshd_config | grep "Port"
-Port 21898
+Port 16038
 #GatewayPorts no
 ```
 ### 🌞 Redémarrer le service
@@ -76,6 +76,86 @@ bj-is@tpos:~$ sudo systemctl restart ssh
 ```
 ### 🌞 Effectuer une connexion SSH sur le nouveau port
 ```bash
-PS C:\Users\jerem> ssh bj-is@192.168.20.3
-ssh: connect to host 192.168.20.3 port 22: Connection refused
+bj-is@tpos:~$ exit
+logout
+Connection to 192.168.20.3 closed.
+PS C:\Users\jerem> ssh -p 16038 bj-is@192.168.20.3
+bj-is@192.168.20.3's password:
+Linux tpos 6.1.0-27-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.115-1 (2024-11-01) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Nov 28 09:00:08 2024 from 192.168.20.1
+
+```
+## B. Le service en lui-même
+### 🌞 Trouver le fichier ssh.service
+```bash
+bj-is@tpos:~$ sudo find / -iname ssh.service
+[sudo] password for bj-is:
+/sys/fs/cgroup/system.slice/ssh.service
+/var/lib/systemd/deb-systemd-helper-enabled/multi-user.target.wants/ssh.service
+/etc/systemd/system/multi-user.target.wants/ssh.service
+/usr/lib/systemd/system/ssh.service
+/usr/share/doc/avahi-daemon/examples/ssh.service
+```
+### 🌞 Déterminer quel est le programme lancé
+```bash
+bj-is@tpos:~$ sudo cat /usr/lib/systemd/system/ssh.service | grep ExecStart=
+ExecStart=/usr/sbin/sshd -D $SSHD_OPTS
+```
+## 4. Créez votre propre service
+### 🌞 Déterminer le dossier qui contient la commande python3
+```bash
+bj-is@tpos:~$ which python3
+/usr/bin/python3
+```
+### 🌞 Créez un fichier /etc/systemd/system/meow_web.service
+### 🌞 Indiquez à l'OS que vous avez modifié les services
+```bash
+bj-is@tpos:~$ systemctl daemon-reload
+==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+Authentication is required to reload the systemd state.
+Authenticating as: BJ-Is,,, (bj-is)
+Password:
+==== AUTHENTICATION COMPLETE ====
+```
+### 🌞 Démarrez votre service
+```bash
+bj-is@tpos:~$ systemctl status meow_web.service
+● meow_web.service - Super serveur web MEOW
+     Loaded: loaded (/etc/systemd/system/meow_web.service; enabled; preset:>
+     Active: active (running) since Thu 2024-11-28 08:58:06 EST; 41min ago
+ Invocation: 9b5c7dec21c1496e8ddf6587a04c20e3
+   Main PID: 742 (python3)
+      Tasks: 1 (limit: 4619)
+     Memory: 17.4M (peak: 19.4M)
+        CPU: 511ms
+     CGroup: /system.slice/meow_web.service
+             └─742 /usr/bin/python3 -m http.server 8888
+
+Nov 28 08:58:06 tpos python3[742]: Serving HTTP on 0.0.0.0 port 8888 (http:>
+Warning: journal has been rotated since unit was started and some journal f>
+lines 1-13/13 (END)
+```
+### 🌞 Déterminer le PID du processus Python en cours d'exécution
+```bash
+bj-is@tpos:~$ ps -ef | grep python3
+bj-is        742       1  0 08:58 ?        00:00:00 /usr/bin/python3 -m http.server 8888
+bj-is       1050     897  0 08:58 ?        00:00:00 /usr/bin/python3 /usr/share/system-config-printer/applet.py
+bj-is       2300    2129  0 09:40 pts/1    00:00:00 grep python3
+```
+### 🌞 Prouvez que le programme écoute derrière le port 8888
+```bash
+bj-is@tpos:~$ sudo ss -tuln | grep 8888
+[sudo] password for bj-is:
+tcp   LISTEN 0      5            0.0.0.0:8888       0.0.0.0:*
+```
+### 🌞 Faire en sote que le service se lance automatiquement au démarrage de la machine
+```bash
+bj-is@tpos:~$ sudo systemctl enable meow_web.service
 ```
