@@ -1,6 +1,6 @@
 ### script autoconfiguration
 ```bash
-[rock-bji@vbox ~]$ cat /opt/autoconfig.sh
+[rock-bji@music ~]$ cat /opt/autoconfig.sh
 #!/bin/bash
 
 log() {
@@ -89,10 +89,10 @@ else
 fi
 
 log "Le script d'autoconfiguration s'est correctement déroulé."
-[rock-bji@vbox ~]$
+[rock-bji@music ~]$
 ```
 ```bash
-[rock-bji@vbox ~]$ sudo /opt/autoconfig.sh music.tp3.b1
+[rock-bji@music ~]$ sudo /opt/autoconfig.sh music.tp3.b1
 [sudo] password for rock-bji:
 21:39:05 [INFO] Le script d'autoconfiguration a démarré
 21:39:05 [INFO] Le script a bien été lancé en root.
@@ -105,5 +105,5 @@ log "Le script d'autoconfiguration s'est correctement déroulé."
 21:39:05 [INFO] Vérification de l'utilisateur rock-bji...
 21:39:05 [INFO] L'utilisateur rock-bji est déjà dans le groupe wheel.
 21:39:05 [INFO] Le script d'autoconfiguration s'est correctement déroulé.
-[rock-bji@vbox ~]$
+[rock-bji@music ~]$
 ```
