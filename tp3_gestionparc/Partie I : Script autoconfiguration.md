@@ -91,3 +91,19 @@ fi
 log "Le script d'autoconfiguration s'est correctement déroulé."
 [rock-bji@vbox ~]$
 ```
+```bash
+[rock-bji@vbox ~]$ sudo /opt/autoconfig.sh music.tp3.b1
+[sudo] password for rock-bji:
+21:39:05 [INFO] Le script d'autoconfiguration a démarré
+21:39:05 [INFO] Le script a bien été lancé en root.
+21:39:05 [INFO] Vérification de l'état de SELinux...
+21:39:05 [INFO] Vérification de l'état du firewall
+21:39:05 [INFO] Service de firewalling firewalld est activé.
+21:39:05 [INFO] Vérification du port SSH
+21:39:05 [INFO] Le service SSH ne tourne pas sur le port 22/TCP. Port actuel : 33672.
+21:39:05 [INFO] La machine s'appelle déjà music.tp3.b1.
+21:39:05 [INFO] Vérification de l'utilisateur rock-bji...
+21:39:05 [INFO] L'utilisateur rock-bji est déjà dans le groupe wheel.
+21:39:05 [INFO] Le script d'autoconfiguration s'est correctement déroulé.
+[rock-bji@vbox ~]$
+```
