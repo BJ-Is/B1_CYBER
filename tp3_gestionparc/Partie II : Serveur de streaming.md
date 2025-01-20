@@ -1,7 +1,7 @@
 ### 1.Préparation de la machine
 ### 🌞 Exécution du script autoconfig.sh
 ```bash
-[rock-bji@music ~]$ sudo /opt/autoconfig.sh music.tp3.b3
+[rock-bji@music ~]$ sudo /opt/autoconfig.sh music.tp3.b1
 22:17:17 [INFO] Le script d'autoconfiguration a démarré
 22:17:17 [INFO] Le script a bien été lancé en root.
 22:17:17 [INFO] Vérification de l'état de SELinux...
@@ -9,7 +9,7 @@
 22:17:17 [INFO] Service de firewalling firewalld est activé.
 22:17:17 [INFO] Vérification du port SSH
 22:17:17 [INFO] Le service SSH ne tourne pas sur le port 22/TCP. Port actuel : 33672.
-22:17:17 [INFO] La machine s'appelle déjà music.tp3.b3.
+22:17:17 [INFO] La machine s'appelle déjà music.tp3.b1.
 22:17:17 [INFO] Vérification de l'utilisateur rock-bji...
 22:17:17 [INFO] L'utilisateur rock-bji est déjà dans le groupe wheel.
 22:17:17 [INFO] Le script d'autoconfiguration s'est correctement déroulé.
